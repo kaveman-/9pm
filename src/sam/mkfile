@@ -1,0 +1,40 @@
+sys=../..
+<$sys/include/mkfile
+
+CFLAGS=$CFLAGS
+LDFLAGS=$LDFLAGS -subsystem:windows
+
+TARG=sam.exe
+OFILES=sam.$O\
+	address.$O\
+	buff.$O\
+	cmd.$O\
+	disk.$O\
+	error.$O\
+	file.$O\
+	io.$O\
+	list.$O\
+	mesg.$O\
+	moveto.$O\
+	multi.$O\
+	plan9.$O\
+	rasp.$O\
+	regexp.$O\
+	shell.$O\
+	string.$O\
+	sys.$O\
+	util.$O\
+	xec.$O\
+
+RESFILE=sam.res
+
+HFILES=sam.h\
+	errors.h\
+	mesg.h\
+
+BIN=$sys/bin
+<$sys/include/mkone
+
+address.$O cmd.$O parse.$O xec.$O unix.$O:	parse.h
+
+sam.res: ../samterm/icon.ico

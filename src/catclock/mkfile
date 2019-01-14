@@ -1,0 +1,18 @@
+sys=../..
+<$sys/include/mkfile
+
+CFLAGS=$CFLAGS
+LDFLAGS=$LDFLAGS #-subsystem:windows
+
+TARG=catclock.exe
+OFILES=catclock.$O\
+
+HFILES=sam.h\
+	errors.h\
+	mesg.h\
+
+BIN=$sys/bin
+
+<$sys/include/mkone
+
+catclock.$O: catback.p eyes.p

@@ -1,0 +1,4 @@
+func fac(a) if (a <= 0) return 1 else return a * fac(a-1)
+fac(0)
+fac(7)
+fac(10)

@@ -1,0 +1,13 @@
+sys=../..
+<$sys/include/mkfile
+
+CFLAGS=$CFLAGS -O2
+
+TARG=$sys/lib/plumb.lib
+OFILES=\
+	plumb.$O\
+
+HFILES=$sys/include/9pm/plumb.h
+
+<$sys/include/mklib
+

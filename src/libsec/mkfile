@@ -1,0 +1,91 @@
+ROOT=../../
+
+CC=cl
+LD=link
+AR=LIB
+O=obj
+RC=rc
+CFLAGS=-I./ -I$ROOT/include -c -nologo -O2 -W3 -YX -MD -Zi -O2
+LDFLAGS=-debug -nologo -incremental:no
+ARFLAGS=-nologo
+
+TARG=libsec.lib
+
+PORT=\
+	des.$O\
+	des3CBC.$O\
+	des3ECB.$O\
+	desCBC.$O\
+	desECB.$O\
+	desmodes.$O\
+	dsaprimes.$O\
+	egalloc.$O\
+	egdecrypt.$O\
+	egencrypt.$O\
+	eggen.$O\
+	egprivtopub.$O\
+	egsign.$O\
+	egverify.$O\
+	genprime.$O\
+	gensafeprime.$O\
+	genstrongprime.$O\
+	hmac.$O\
+	md4.$O\
+	md5.$O\
+	prng.$O\
+	probably_prime.$O\
+	rc4.$O\
+	rsaalloc.$O\
+	rsadecrypt.$O\
+	rsaencrypt.$O\
+	rsagen.$O\
+	rsaprivtopub.$O\
+	sha1.$O\
+	smallprimes.$O\
+	smallprimetest.$O\
+
+WIN32=\
+	genrandom.$O\
+
+OFILES=\
+	$PORT\
+	$WIN32\
+
+HFILES=\
+	os.h\
+	libsec_prefix.h\
+	libsec.h\
+
+all:V: $TARG
+
+test:V: test.exe
+
+test.exe: test.$O $TARG
+	$LD -nologo -incremental:no -debug -out:$target $prereq
+
+t.exe: t.$O
+	$LD -nologo -incremental:no -debug -out:$target $prereq
+
+$TARG:	$OFILES
+	$AR $ARFLAGS -out:$target $prereq
+
+%.exe: %.$O $TARG ../../mp/win32/libmp.lib
+	$LD $LDFLAGS -out:$target $prereq
+
+install:V: $TARG $HFILES
+	cp $TARG $ROOT/lib
+	cat libsec_prefix.h libsec.h > $ROOT/include/libsec.h
+
+%.$O:	$HFILES		# don't combine with following %.$O rules
+
+%.$O:	%.c
+	$CC $CFLAGS $stem.c
+
+%.$O:	%.s
+	$AS $AFLAGS $stem.s
+
+nuke:V:
+	rm -f *.$O a.out y.tab.? y.debug y.output 
+
+clean:V:
+	rm -f *.$O *.exe *.dll y.tab.? y.debug y.output $TARG *.pch *.map *.opt

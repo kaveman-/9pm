@@ -1,0 +1,29 @@
+sys=../..
+<$sys/include/mkfile
+
+LDFLAGS=$LDFLAGS -subsystem:windows -nodefaultlib:libcmt.lib
+
+TARG=samterm.exe
+OFILES=main.$O\
+	icons.$O\
+	menu.$O\
+	mesg.$O\
+	rasp.$O\
+	scroll.$O\
+	flayer.$O\
+	io.$O\
+	9pm.$O\
+
+RESFILE=samterm.res
+
+HFILES=samterm.h\
+	flayer.h\
+
+BIN=$sys/bin
+
+<$sys/include/mkone
+
+mesg.$O:	../sam/mesg.h
+
+samterm.res:\
+	icon.ico\

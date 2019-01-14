@@ -1,0 +1,14 @@
+sys=../..
+<$sys/include/mkfile
+
+all:V:
+	cd win32
+	mk $MKFLAGS all
+
+install:V:
+	cd win32
+	mk $MKFLAGS install
+
+clean:V:
+	cd win32
+	mk $MKFLAGS clean

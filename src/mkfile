@@ -1,0 +1,76 @@
+sys=..
+<$sys/include/mkfile
+
+TARG=`{ls *.c | sed 's/..$/''/; s/^/''/'}
+YFILES=
+HFILES=$sys/include/u.h $sys/include/9pm/libc.h $sys/include/9pm/bio.h
+BIN=$sys/bin
+PROGS=${TARG:%=%.exe}
+YFLAGS=-d
+
+CFLAGS=$CFLAGS -O2
+LDFLAGS=$LDFLAGS
+
+NOMK=cp
+
+LIBS= win 9pm bio regexp libg frame srv plumb mp libsec stdio
+
+DIRS=mk rcsh sam samterm 9term diff 4s catclock hoc secdump grep srx
+
+none:VQ:
+	echo usage: mk all, install, cmd.exe, or cmd.install
+
+all:V:	$PROGS
+
+B.exe:	B.obj
+	$LD $LDFLAGS -out:$target -subsystem:windows $prereq
+
+&.exe:	%.obj
+	$LD $LDFLAGS -out:$target $prereq
+
+%.obj:	$HFILES
+
+%.$O:	%.c
+	$CC $CFLAGS $stem.c
+
+%.tab.h %.tab.c:	%.y
+	$YACC $YFLAGS -s $stem $prereq
+
+%.install:V:	$BIN/%.exe
+
+$BIN/%.exe:	%.exe
+	install $prereq $target
+
+clean:V:
+	rm -f *.$O y.tab.? y.debug y.output $PROGS *.pch *.pdb *.map
+	for(i in $DIRS $LIBS) @{
+		cd $i
+		echo mk $i
+		mk $MKFLAGS clean
+	}
+
+install:V:
+	mk $MKFLAGS libraries
+	mk $MKFLAGS files
+	mk $MKFLAGS directories
+
+files:V:
+	mk $MKFLAGS $TARG.install
+
+cleanfiles:V:
+	rm -f *.$O a.out y.tab.? y.debug y.output $TARG *.pch *.pdb *.map
+
+libraries:V:
+	for(i in $LIBS) @{
+		cd $i
+		echo mk $i
+		mk $MKFLAGS all
+		mk install
+	}
+
+directories:V:
+	for(i in $DIRS) @{
+		cd $i
+		echo mk $i
+		mk $MKFLAGS install
+	}

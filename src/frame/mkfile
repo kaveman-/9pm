@@ -1,0 +1,21 @@
+sys=../..
+<$sys/include/mkfile
+
+CFLAGS=$CFLAGS -O2
+
+TARG=$sys/lib/frame.lib
+OFILES=\
+	frbox.$O\
+	frdraw.$O\
+	frdelete.$O\
+	frinit.$O\
+	frinsert.$O\
+	frptofchar.$O\
+	frselect.$O\
+	frstr.$O\
+	frutil.$O\
+
+HFILES=$sys/include/frame.h
+
+<$sys/include/mklib
+

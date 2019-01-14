@@ -1,0 +1,56 @@
+sys=../..
+<$sys/include/mkfile
+
+TARG=$sys/lib/libg.lib
+CFLAGS=$CFLAGS -Og
+LDFLAGS=$LDFLAGS
+OFILES=\
+	arc.$O\
+	arith.$O\
+	balloc.$O\
+	bbound.$O\
+	binit.$O\
+	bitblt.$O\
+	bitbltclip.$O\
+	border.$O\
+	circle.$O\
+	clipline.$O\
+	clipr.$O\
+#	cursorset.$O\
+#	cursorswitch.$O\
+	disc.$O\
+	ellipse.$O\
+	event.$O\
+	font.$O\
+	getrect.$O\
+	latin1.$O\
+	linesize.$O\
+	menuhit.$O\
+	point.$O\
+	polysegment.$O\
+	rdbitmap.$O\
+	rdbitmapfile.$O\
+	rdfontfile.$O\
+	rdsubfontfile.$O\
+	rectclip.$O\
+	rgbpix.$O\
+	segment.$O\
+	subfalloc.$O\
+	tabs.$O\
+	texture.$O\
+	wrbitmap.$O\
+	wrbitmapfile.$O\
+	wrcolmap.$O\
+	wrsubfontfile.$O\
+	win.$O\
+	palette.$O\
+
+HFILES=$sys/include/9pm/libg.h\
+	tabs.h\
+	bltwin.h\
+
+<$sys/include/mklib
+
+test:V: test.$O $LIB
+	$LD $LDFLAGS test.$O 
+

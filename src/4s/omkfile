@@ -1,0 +1,20 @@
+<$sys/include/mkfile
+
+CFLAGS=$CFLAGS
+LDFLAGS=$LDFLAGS -subsystem:windows
+
+TARG=4s.exe
+OFILES=4s.$O\
+
+HFILES=sam.h\
+	errors.h\
+	mesg.h\
+
+LIBS=$LIBS\
+	libg.lib\
+
+BIN=$9pm/bin
+
+<$sys/include/mkone
+
+4s.$O: xs.h

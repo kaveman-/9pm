@@ -1,0 +1,41 @@
+ROOT=../..
+BIN=$ROOT/bin
+
+CC=cl
+LD=link
+RC=rc
+O=obj
+CFLAGS=-c -nologo -W3 -YX -Zi -MD -I $ROOT/include -I.
+LDFLAGS=-debug -nologo -incremental:no -subsystem:console -libpath:$ROOT/lib 
+RCFLAGS=
+
+TARG=srx.exe
+
+OFILES=srx.$O\
+	packet.$O\
+	misc.$O\
+	prompt.$O\
+	bowline.$O\
+
+HFILES=\
+	srx.h\
+	resource.h\
+
+all:V: $TARG
+
+$TARG: $OFILES password.res 
+	$LD $LDFLAGS -out:$target $prereq wsock32.lib
+
+%.$O:	$HFILES		# don't combine with following %.$O rules
+
+%.$O:	%.c
+	$CC $CFLAGS $stem.c
+
+password.res resource.h:	password.rc
+	$RC $RCFLAGS $prereq
+
+clean:V:
+	rm -f *.obj *.pch *.pdb *.map $TARG
+
+install:V: $TARG
+	install $TARG $BIN

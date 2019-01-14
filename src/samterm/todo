@@ -1,0 +1,29 @@
+9pm.c
+	only
+SAMTERM.RES
+	only
+flayer.c
+flayer.h
+icon.ico
+	only
+icons.c
+	ok
+io.c
+main.c
+	mod - fix up BACKSCROLLKEY
+menu.c
+	mod - ok
+mesg.c
+	mod - ok
+mkfile
+plan9.c
+	mod - ok
+rasp.c
+	ok
+resource.h
+	only
+samterm.h
+samterm.rc
+	only
+scroll.c
+	ok

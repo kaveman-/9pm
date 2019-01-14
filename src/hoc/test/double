@@ -1,0 +1,9 @@
+proc double(){
+}
+proc double(x){
+	if(x > 1){
+		double(x/2)
+	}
+	print(x)
+}
+double(1024)

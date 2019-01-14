@@ -1,0 +1,33 @@
+sys=../..
+<$sys/include/mkfile
+
+CFLAGS=$CFLAGS
+LDFLAGS=$LDFLAGS -subsystem:windows
+
+TARG=4s.exe\
+	5s.exe\
+
+HFILES=sam.h\
+	errors.h\
+	mesg.h\
+
+BIN=$sys/bin
+
+all:V: $TARG
+
+install:V: $TARG
+	install $TARG $BIN
+
+5s.$O 4s.$O: xs.h
+
+%.exe:	%.$O
+	$LD $LDFLAGS -out:$target $prereq
+
+
+%.$O:	$HFILES		# don't combine with following %.$O rules
+
+%.$O:	%.c
+	$CC $CFLAGS $stem.c
+
+clean:V:
+	rm -f *.$O *.exe y.tab.? y.debug y.output $TARG *.pch *.pdb *.map

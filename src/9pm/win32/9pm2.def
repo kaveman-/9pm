@@ -1,0 +1,114 @@
+EXPORTS
+	pm_argv0
+
+	open	
+	close
+	create
+	chdir
+	dup
+	fstat
+	getwd
+	read
+	readx
+	remove
+	stat
+	seek
+	wstat
+	write
+	writex
+	pipe
+	pipeeof
+	access
+	mktemp
+	readn
+
+	convM2D
+	convD2M
+	dirstat
+	dirfstat
+	dirwstat
+	dirread
+
+	malloc
+	mallocz
+	free
+	realloc
+	reallocz
+	mallocstats
+	sbrk
+	szero
+	
+	print
+	fprint
+	sprint
+	snprint
+	doprint
+	fmtinstall
+	numbconv
+	strconv
+	fltconv
+	dirmodeconv
+
+	qsort
+
+	lock
+	unlock
+	canlock
+	lockwait
+	locksignal
+	locksignalall
+	
+	qlock
+	qunlock
+	canqlock
+	holdqlock
+
+	ewait
+	esignal
+	epoison
+	ereset
+	epoll
+
+	errstr
+	werrstr
+	_exits
+	exits
+	atexit
+	atexitdont
+	perror
+	fatal
+
+	PM_assert
+
+	sleep
+	abort
+	time
+	getpid
+	gettid
+	thread
+	threadexit
+	threadnowait
+	threadtime
+	cputime
+	realtime
+	getuser
+;env.c
+	getenv
+	getenvall
+	putenv
+;proc.c
+	proc
+	procwait
+	prockill
+	consintr
+	consonintr
+
+; proxy for libcmt
+	_fltused
+	_chkstk
+	memmove
+	memset
+	_setjmp3
+	longjmp
+	_ftol
+	_allshl

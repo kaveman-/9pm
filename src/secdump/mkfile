@@ -1,0 +1,14 @@
+sys=../..
+<$sys/include/mkfile
+
+CFLAGS=$CFLAGS
+LDFLAGS=$LDFLAGS
+
+TARG=secdump.exe
+
+LDFLAGS= $LDFLAGS libcmt.lib mpr.lib kernel32.lib advapi32.lib netapi32.lib
+
+OFILES = secdump.$O
+
+BIN=$sys/bin
+<$sys/include/mkone

@@ -1,0 +1,153 @@
+sys=../../..
+<$sys/include/mkfile
+
+CFLAGS=$CFLAGS -O2
+BIN=$sys/bin
+LIBDIR=$sys/lib
+
+OFILES=\
+	thread.$O\
+	access.$O\
+	doprint.$O\
+	print.$O\
+	malloc.$O\
+	lock.$O\
+	qlock.$O\
+	event.$O\
+	queue.$O\
+	main.$O\
+	fd.$O\
+	env.$O\
+	time.$O\
+	proc.$O\
+	sec.$O\
+	qsort.$O\
+	atexit.$O\
+	convM2D.$O\
+	convD2M.$O\
+	werrstr.$O\
+	dirfstat.$O\
+	dirwstat.$O\
+	dirstat.$O\
+	dirread.$O\
+	perror.$O\
+	dirmodeconv.$O\
+	mktemp.$O\
+	readn.$O\
+
+LFILES=\
+	abs.$O\
+	asin.$O\
+	atan.$O\
+	atof.$O\
+	atol.$O\
+	charstod.$O\
+	cleanname.$O\
+	crt.$O\
+	ctime.$O\
+	ctype.$O\
+	dll.$O\
+	exp.$O\
+	fabs.$O\
+	floor.$O\
+	fmod.$O\
+	frexp.$O\
+	getfields.$O\
+	log.$O\
+	memccpy.$O\
+	memchr.$O\
+	memcmp.$O\
+	memcpy.$O\
+	nan.$O\
+	pow.$O\
+	pow10.$O\
+	rand.$O\
+	ref.$O\
+	rune.$O\
+	sin.$O\
+	sinh.$O\
+	sqrt.$O\
+	strcat.$O\
+	strncat.$O\
+	strchr.$O\
+	strcmp.$O\
+	strcpy.$O\
+	strdup.$O\
+	strlen.$O\
+	strncmp.$O\
+	strecpy.$O\
+	strncpy.$O\
+	strpbrk.$O\
+	strrchr.$O\
+	strtod.$O\
+	strtol.$O\
+	strtoul.$O\
+	tan.$O\
+	tanh.$O\
+	tas.$O\
+	tokenize.$O\
+	toupper.$O\
+	utflen.$O\
+	utfrrune.$O\
+	utfrune.$O\
+	utftowstr.$O\
+	utfutf.$O\
+	wstrcat.$O\
+	wstrchr.$O\
+	wstrcmp.$O\
+	wstrcpy.$O\
+	wstrdup.$O\
+	wstrecpy.$O\
+	wstrlen.$O\
+	wstrncat.$O\
+	wstrncmp.$O\
+	wstrncpy.$O\
+	wstrrchr.$O\
+	wstrtoutf.$O\
+	wstrutflen.$O\
+
+LIBS=c.lib shell32.lib mpr.lib user32.lib advapi32.lib kernel32.lib win.lib libcmt.lib
+
+HFILES=$sys/include/9pm/libc.h\
+#	$sys/include/win/type.h\
+#	$sys/include/win/kernel.h\
+	9pm.h\
+
+
+9pm2.dll: $OFILES 9pm2.def c.lib
+	$LD -nologo -incremental:no -nodefaultlib -dll -debug -out:$target -def:9pm2.def $OFILES $LIBS 
+	#$LD -nologo -incremental:no -verbose -dll -debug -out:$target -def:9pm2.def $OFILES $LIBS | grep libcmt
+
+all:V: install
+
+install:V: 9pm2.dll
+	install 9pm2.lib c.lib $LIBDIR
+	install 9pm2.dll $BIN
+	install 9pm2.dll \\oscar\bin\9pm\bin
+
+c.lib:V: $LFILES
+	rm -f $target
+	$AR $ARFLAGS -out:$target $LFILES
+
+test.exe: test.$O
+	$LD $LDFLAGS -out:$target -nodefaultlib $prereq n9pm.lib $LIBS 
+	
+%.$O:	$HFILES		# don't combine with following %.$O rules
+
+%.$O:	%.c
+	$CC $CFLAGS $stem.c
+
+%.$O:	../port/%.c
+	$CC $CFLAGS ../port/$stem.c
+
+%.$O:	%.asm
+	$AS $AFLAGS $stem.asm
+
+%.res:	%.rc
+	$RC $RCFLAGS $stem.rc
+
+nuke:V:
+	rm -f *.$O a.out y.tab.? y.debug y.output
+
+clean:V:
+	rm -f *.$O a.out y.tab.? y.debug y.output *.pch *.map *.dll *.lib *.exp

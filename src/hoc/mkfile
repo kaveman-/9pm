@@ -1,0 +1,20 @@
+sys=../..
+<$sys/include/mkfile
+
+TARG=hoc.exe
+HFILES=\
+	y.tab.h\
+	hoc.h\
+
+OFILES=\
+	y.tab.$O\
+	code.$O\
+	init.$O\
+	math.$O\
+	symbol.$O\
+
+YFILES=hoc.y\
+
+BIN=$sys/bin
+<$sys/include/mkone
+

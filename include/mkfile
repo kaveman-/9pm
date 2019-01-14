@@ -1,0 +1,30 @@
+MSDEV=\\oscar\bin\msdev
+CC=$MSDEV/bin/cl
+LD=$MSDEV/bin/link
+AR=$MSDEV/bin/LIB
+O=obj
+AS=ml
+RC=\\osacr/bin/msdev/bin/rc
+OS=
+CPUS=
+CFLAGS=-c -nologo -W3 -YX -Zi -MT -Zl
+# -nologo	a little less verbose
+# -W3		level 3 warning - u.h contains pragma's that inhibit some of the very silly warnings
+# -YX		use precompiled headers (.PCH files)
+# -G5		generate code that runs best on Pentiums - has bugs on 4.2
+# -Zi		generate debug info (.PDB files)
+# -MT		Link with LIBCMT.LIB (multi thread static)
+# -Zl 		don't include libcmt.lib and oldnames.lib in object files
+# -Oi		enable intrinic function, i.e abs, sin, sqrt, etc
+# -FAs		generate asm listing with source
+# -G5		Pentium code
+# -Ob2		Let the compiler inline function -O2 only inlines functions marked inline
+INCLUDE=$MSDEV/include;$sys/include
+LIB=$MSDEV/lib;$sys/lib
+LDFLAGS=-entry:mainCRTStartup -debug -nologo -incremental:no
+ARFLAGS=-nologo
+
+AFLAGS=-c -nologo -coff  -Cx -Zm -DQUIET -Di386
+RCFLAGS=
+LEX=lex
+YACC=yacc

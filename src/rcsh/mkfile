@@ -1,0 +1,31 @@
+sys=../..
+<$sys/include/mkfile
+
+BIN=$sys/bin
+CFLAGS=$CFLAGS
+
+TARG=rcsh.exe
+OFILES=\
+	code.$O\
+	exec.$O\
+	glob.$O\
+	here.$O\
+	io.$O\
+	lex.$O\
+	main.$O\
+	pcmd.$O\
+	pfnc.$O\
+	simple.$O\
+	trap.$O\
+	tree.$O\
+	var.$O\
+	word.$O\
+	y.tab.$O\
+
+HFILES=\
+	rc.h\
+	y.tab.h\
+
+YFILES=syn.y
+
+<$sys/include/mkone

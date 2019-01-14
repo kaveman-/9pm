@@ -1,0 +1,27 @@
+sys=../..
+<$sys/include/mkfile
+
+TARG=$sys/lib/srv.lib
+CFLAGS=$CFLAGS
+LDFLAGS=$LDFLAGS
+OFILES=\
+	srv.$O\
+	sinfo.$O\
+	srvremote.$O\
+	srvping.$O\
+	srvpipe.$O\
+	srvsmc.$O\
+	announce.$O\
+	dial.$O\
+
+HFILES=$sys/include/9pm/srv.h\
+
+<$sys/include/mklib
+
+test:V: test.exe test2.exe
+
+test.exe: test.$O $TARG
+	$LD $LDFLAGS -out:$target $prereq
+
+test2.exe: test2.$O $TARG
+	$LD $LDFLAGS -out:$target $prereq

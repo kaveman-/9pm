@@ -1,0 +1,104 @@
+sys=../../
+<$sys/include/mkfile
+
+TARG=$sys/lib/win.lib
+CFLAGS=$CFLAGS -O2
+
+KERNEL=\
+	CallNamedPipe.$O\
+	CreateDirectory.$O\
+	CreateEvent.$O\
+	CreateFile.$O\
+	CreateFileMapping.$O\
+	CreateMutex.$O\
+	CreateNamedPipe.$O\
+	CreateProcess.$O\
+	CreateSemaphore.$O\
+	DeleteFile.$O\
+	FindFirstFile.$O\
+	FindNextFile.$O\
+	FormatMessage.$O\
+	FreeEnvironmentStrings.$O\
+	GetCommandLine.$O\
+	GetComputerName.$O\
+	GetCurrentDirectory.$O\
+	GetDriveType.$O\
+	GetEnvironmentVariable.$O\
+	GetEnvironmentStrings.$O\
+	GetFileAttributes.$O\
+	GetFullPathName.$O\
+	GetModuleHandle.$O\
+	GetModuleFileName.$O\
+	GetVersionEx.$O\
+	GetVolumeInformation.$O\
+	LoadLibrary.$O\
+	MoveFile.$O\
+	ReadConsole.$O\
+	RemoveDirectory.$O\
+	SetCurrentDirectory.$O\
+	SetEnvironmentVariable.$O\
+	SetFileAttributes.$O\
+	SetWindowLong.$O\
+	WNetEnumResource.$O\
+	WNetOpenEnum.$O\
+	WriteConsole.$O\
+
+USER=\
+	CreateWindowEx.$O\
+	DefWindowProc.$O\
+	DispatchMessage.$O\
+	DrawText.$O\
+	FindWindow.$O\
+	GetMessage.$O\
+	GetWindowLong.$O\
+	LoadCursor.$O\
+	LoadIcon.$O\
+	MessageBox.$O\
+	MessageBoxEx.$O\
+	PostMessage.$O\
+	PostThreadMessage.$O\
+	RegisterClass.$O\
+	RegisterClassEx.$O\
+	SendMessage.$O\
+	SetClassLong.$O\
+
+GDI=\
+	CreateFontIndirect.$O\
+	EnumFontFamilies.$O\
+	ExtTextOut.$O\
+	GetCharWidth.$O\
+	GetTextFace.$O\
+	TextOut.$O\
+
+COMMDLG=\
+	ChooseFont.$O\
+
+MM=\
+	waveOutGetDevCaps.$O\
+
+MPR=\
+	WNetGetUniversalName.$O\
+
+SHELLAPI=\
+	FindExecutable.$O\
+
+REG=\
+	RegCreateKey.$O\
+	RegDeleteKey.$O\
+	RegOpenKey.$O\
+	RegQueryValue.$O\
+	RegSetValueEx.$O\
+
+WINSOCK=\
+	WSASocket.$O\
+
+OFILES=$KERNEL $USER $GDI $MM $MPR $COMMDLG $SHELLAPI $REG $WINSOCK util.$O
+
+HFILES=\
+	win.h\
+#	$sys/include/win/gdi.h\
+#	$sys/include/win/kernel.h\
+#	$sys/include/win/user.h\
+
+<$sys/include/mklib
+

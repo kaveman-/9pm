@@ -1,0 +1,15 @@
+sys=../..
+<$sys/include/mkfile
+
+TARG=diff.exe
+CFLAGS=$CFLAGS -O2
+OFILES=\
+	diffdir.$O\
+	diffio.$O\
+	diffreg.$O\
+	main.$O\
+
+HFILES=diff.h
+
+BIN=$sys/bin
+<$sys/include/mkone

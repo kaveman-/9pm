@@ -1,0 +1,26 @@
+sys=../..
+<$sys/include/mkfile
+
+CFLAGS=$CFLAGS -O2
+
+TARG=$sys/lib/bio.lib
+OFILES=\
+	bbuffered.$O\
+	bfildes.$O\
+	bflush.$O\
+	bgetrune.$O\
+	bgetc.$O\
+	bgetd.$O\
+	binit.$O\
+	bprint.$O\
+	bputrune.$O\
+	bputc.$O\
+	brdline.$O\
+	bread.$O\
+	bseek.$O\
+	bwrite.$O\
+
+HFILES=$sys/include/bio.h
+
+<$sys/include/mklib
+

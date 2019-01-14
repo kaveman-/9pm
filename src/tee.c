@@ -1,0 +1,72 @@
+/*
+ * tee-- pipe fitting
+ */
+
+#include <u.h>
+#include <9pm/libc.h>
+
+int	uflag;
+int	aflag;
+int	openf[100];
+
+char in[8192];
+
+void	intrignore(void);
+
+void
+main(int argc, char **argv)
+{
+	int i, j;
+	int r, n;
+
+	ARGBEGIN {
+	case 'a':
+		aflag++;
+		break;
+
+	case 'i':
+		consonintr(intrignore);
+		break;
+
+	case 'u':
+		uflag++;
+		break;
+	ARGEND }
+
+	USED(argc);
+	n = 0;
+	while(*argv) {
+		if(aflag) {
+			openf[n] = open(argv[0], OWRITE);
+			if(openf[n] < 0)
+				openf[n] = create(argv[0], OWRITE, 0666);
+			seek(openf[n], 0L, 2);
+		} else
+			openf[n] = create(argv[0], OWRITE, 0666);
+		if(openf[n] < 0) {
+			fprint(2, "tee: cannot open %s: ", argv[0]);
+			perror("");
+		} else
+			n++;
+		argv++;
+	}
+	openf[n++] = 1;
+
+	for(;;) {
+		r = read(0, in, sizeof in);
+		if(r <= 0)
+			exits(0);
+		if(uflag) {
+			for(j=0; j<r; j++)
+			for(i=0; i<n; i++)
+				write(openf[i], &in[j], 1);
+		} else
+		for(i=0; i<n; i++)
+			write(openf[i], in, r);
+	}
+}
+
+void
+intrignore(void)
+{
+}

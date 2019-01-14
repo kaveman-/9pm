@@ -1,0 +1,19 @@
+sys=../..
+<$sys/include/mkfile
+
+TARG=grep.exe
+BIN=$sys/bin
+
+CFLAGS=$CFLAGS -O2
+LDFLAGS=$LDFLAGS
+
+OFILES=\
+	y.tab.$O\
+	main.$O\
+	comp.$O\
+	sub.$O\
+
+HFILES=grep.h
+YFILES=grep.y
+
+<$sys/include/mkone

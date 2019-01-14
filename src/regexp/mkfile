@@ -1,0 +1,21 @@
+sys=../..
+<$sys/include/mkfile
+
+CFLAGS=$CFLAGS -O2
+
+TARG=$sys/lib/regexp.lib
+OFILES=\
+	regcomp.$O\
+	regerror.$O\
+	regexec.$O\
+	regsub.$O\
+	regaux.$O\
+	rregexec.$O\
+	rregsub.$O\
+
+HFILES=\
+	$sys/include/9pm/regexp.h\
+	regcomp.h\
+
+<$sys/include/mklib
+

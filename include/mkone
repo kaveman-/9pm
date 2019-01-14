@@ -1,0 +1,38 @@
+YFLAGS=-d
+AFLAGS=
+
+default:V:	a.out
+
+all:V:	a.out
+
+a.out:	$OFILES $RESFILE
+	$LD $LDFLAGS -out:$target $prereq
+
+%.$O:	$HFILES		# don't combine with following %.$O rules
+
+%.$O:	%.c
+	$CC $CFLAGS $stem.c
+
+%.$O:	%.s
+	$AS $AFLAGS $stem.s
+
+%.res:	%.rc
+	$RC $RCFLAGS $stem.rc
+
+y.tab.h y.tab.c:	$YFILES
+	$YACC $YFLAGS $prereq
+
+install:V:	$BIN/$TARG
+
+$BIN/$TARG:	a.out
+	install $prereq $BIN/$TARG
+
+installall:V:
+	for(objtype in $CPUS)
+		mk install
+
+nuke:V:
+	rm -f *.$O a.out y.tab.? y.debug y.output $TARG
+
+clean:V:
+	rm -f *.$O a.out y.tab.? y.debug y.output $TARG *.pch *.pdb *.map *.mdp

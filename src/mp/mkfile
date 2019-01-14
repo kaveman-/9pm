@@ -1,0 +1,77 @@
+ROOT=../..
+
+CC=cl
+LD=link
+AR=LIB
+O=obj
+RC=rc
+CFLAGS=-I./ -c -nologo -O2 -W3 -YX -MD -Zi -O2
+LDFLAGS=-debug -nologo -incremental:no
+ARFLAGS=-nologo
+
+TARG=libmp.lib
+
+PORT=\
+	mpaux.$O\
+	mpconv.$O\
+	strtomp.$O\
+	mptobe.$O\
+	mptole.$O\
+	betomp.$O\
+	letomp.$O\
+	mpadd.$O\
+	mpsub.$O\
+	mpcmp.$O\
+	mpmul.$O\
+	mpleft.$O\
+	mpright.$O\
+	mpvecadd.$O\
+	mpvecsub.$O\
+	mpvecdigmuladd.$O\
+	mpveccmp.$O\
+	mpdigdiv.$O\
+	mpdiv.$O\
+	mpexp.$O\
+	mpmod.$O\
+	mpextendedgcd.$O\
+	mpinvert.$O\
+	mprand.$O\
+	crt.$O\
+	u64.$O\
+	u32.$O\
+
+HFILES=\
+	os.h\
+	mp_prefix.h\
+	mp.h\
+
+all:V: $TARG
+
+test:V: test.exe
+
+test.exe: test.$O $TARG
+	$LD -nologo -incremental:no -debug -out:$target $prereq
+
+$TARG:	$PORT
+	$AR $ARFLAGS -out:$target $prereq
+
+%.exe: %.$O
+	$LD $LDFLAGS -out:$target $prereq
+
+install:V: $TARG $HFILES
+	cp $TARG $ROOT/lib
+	cat mp_prefix.h mp.h > $ROOT/include/mp.h
+
+%.$O:	$HFILES		# don't combine with following %.$O rules
+
+%.$O:	%.c
+	$CC $CFLAGS $stem.c
+
+%.$O:	%.s
+	$AS $AFLAGS $stem.s
+
+nuke:V:
+	rm -f *.$O a.out y.tab.? y.debug y.output blcrt.dll
+
+clean:V:
+	rm -f *.$O *.exe *.dll y.tab.? y.debug y.output $TARG *.pch *.map *.opt
